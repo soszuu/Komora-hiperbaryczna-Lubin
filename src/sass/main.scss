@@ -1,0 +1,925 @@
+@use 'colors';
+
+*,
+*::before,
+*::after {
+	box-sizing: border-box;
+	margin: 0;
+	padding: 0;
+}
+
+html {
+	font-size: 62.5%;
+	scroll-behavior: smooth;
+	scroll-padding-top: 8vh;
+}
+
+body {
+	position: relative;
+	font-family: 'Montserrat', sans-serif;
+	font-size: 1.6rem;
+}
+
+p,
+button {
+	font-family: 'Poppins', sans-serif;
+}
+
+//MIXINS
+.wrapper {
+	max-width: 1200px;
+	margin: 0 auto;
+}
+.button {
+	padding: 10px 5px;
+	border-radius: 8px;
+	background-color: colors.$main;
+	color: white;
+	border: none;
+	box-shadow: 3px 3px 10px rgba($color: black, $alpha: 0.3);
+}
+.red-text {
+	color: colors.$red;
+}
+.blue-text {
+	color: colors.$main;
+}
+
+//NAWIGACJA
+.nav {
+	display: flex;
+	position: sticky;
+	top: 0;
+	justify-content: space-between;
+	padding: 10px 15px;
+	border-bottom: 1px solid rgba($color: black, $alpha: 0.1);
+	background-color: white;
+	z-index: 10;
+
+	&-logo {
+		img {
+			height: 70px;
+		}
+	}
+
+	&-toggle {
+		padding: 5px 15px;
+		border: none;
+		background: none;
+	}
+
+	&-link-box {
+		position: absolute;
+		top: -1000px;
+		left: 0;
+		right: 0;
+		height: 100vh;
+		display: flex;
+		flex-direction: column;
+		justify-content: space-around;
+		background-color: white;
+
+		.nav-toggle {
+			position: absolute;
+			top: 25px;
+			right: 15px;
+		}
+		.nav-links {
+			display: flex;
+			flex-direction: column;
+			justify-content: space-between;
+			height: 30%;
+			text-align: center;
+
+			&-link {
+				color: black;
+				text-decoration: none;
+				font-weight: 500;
+				text-transform: uppercase;
+			}
+		}
+		.nav-reservation-btn {
+			margin: 0 auto;
+			width: 70%;
+			transform: translateY(-200%);
+			text-transform: uppercase;
+			font-weight: 500;
+		}
+	}
+
+	&-link-box-active {
+		animation: navOpenning ease-out 0.3s forwards;
+	}
+}
+
+//PANEL DO REZERWACJI
+.reservation-panel {
+	display: none;
+	position: fixed;
+	top: 0;
+	left: 0;
+	right: 0;
+	bottom: 0;
+	background-color: rgba($color: grey, $alpha: 0.3);
+	z-index: 100;
+
+	&-content {
+		position: absolute;
+		top: 50%;
+		left: 50%;
+		width: 80%;
+		padding: 15px;
+		transform: translate(-50%, -50%);
+		border-radius: 8px;
+		background-color: white;
+		text-align: center;
+
+		&-close-btn {
+			text-align: right;
+		}
+
+		&-text {
+			margin: 2rem 0;
+			font-weight: 500;
+		}
+		&-btn {
+			display: flex;
+			align-items: center;
+			margin: 0 auto 2rem;
+			padding-left: 20px;
+			padding-right: 20px;
+
+			a {
+				display: block;
+				padding: 5px;
+				color: white;
+				text-decoration: none;
+			}
+		}
+	}
+}
+.reservation-panel-active {
+	display: block;
+}
+
+//SEKCJA HERO
+.hero {
+	&-box {
+		padding: 0 2em;
+		&-text {
+			margin-top: 4rem;
+			text-align: center;
+
+			&-title {
+				font-size: 2.6rem;
+				text-transform: uppercase;
+			}
+			&-undertitle {
+				margin: 2rem 0 4rem;
+				font-weight: 500;
+			}
+		}
+
+		img {
+			display: block;
+			margin: 0 auto 6rem;
+			width: 200px;
+		}
+	}
+}
+
+//SEKCJA POD HERO - PLUSY KORZYSTANIA
+.three-benefits {
+	background-color: colors.$main;
+	.wrapper {
+		display: flex;
+		flex-direction: column;
+		align-items: center;
+		padding: 2rem 5rem;
+	}
+	&-box {
+		margin: 2rem 0;
+		text-align: center;
+		img {
+			display: block;
+			height: 50px;
+			margin: 0 auto 1rem;
+		}
+		&-text {
+			color: white;
+			font-weight: 500;
+		}
+	}
+}
+
+//SEKCJA Z WIDEO
+.video {
+	.wrapper {
+		margin: 5rem auto;
+		padding: 2rem;
+		text-align: center;
+	}
+
+	&-title {
+		margin-bottom: 3rem;
+		font-size: 2.6rem;
+	}
+	&-element {
+		margin-bottom: 2rem;
+		width: 250px;
+	}
+	&-promo {
+		&-text {
+			text-transform: uppercase;
+			font-weight: 500;
+			&:nth-of-type(1),
+			&:nth-of-type(3) {
+				font-size: 2.3rem;
+			}
+		}
+		.promo-animation {
+			font-weight: 600;
+			animation: promoTextFlicker 2s infinite;
+		}
+	}
+	&-cta {
+		margin-top: 4rem;
+		img {
+			margin-bottom: 2rem;
+			width: 200px;
+			border-radius: 8px;
+			box-shadow: 3px 3px 5px rgba($color: black, $alpha: 0.2);
+		}
+		&-text {
+			margin: 0 auto;
+			width: 50%;
+			font-weight: 500;
+			text-transform: uppercase;
+
+			&-btn {
+				margin: 2rem auto 4rem;
+				display: block;
+				width: 150px;
+				button {
+					text-transform: uppercase;
+				}
+			}
+		}
+	}
+}
+//CTA KONTAKT
+.contact-cta {
+	position: relative;
+	height: 400px;
+	background-image: url(../img/cta-bgc-photo.webp);
+	background-position: center;
+	background-size: cover;
+	z-index: 1;
+
+	&-bg {
+		position: absolute;
+		top: 0;
+		left: 0;
+		right: 0;
+		bottom: 0;
+		background-color: rgba(0, 0, 0, 0.4);
+		z-index: -1;
+	}
+
+	&-logo {
+		position: absolute;
+		bottom: 5px;
+		left: 5px;
+		z-index: -2;
+		img {
+			width: 75px;
+		}
+	}
+
+	&-content-box {
+		width: 100%;
+		height: 100%;
+		text-align: center;
+		display: flex;
+		flex-direction: column;
+		align-items: center;
+		justify-content: space-evenly;
+		.contact-cta-title {
+			color: white;
+			font-size: 2.6rem;
+			text-transform: uppercase;
+			font-weight: 500;
+			z-index: 100;
+		}
+		.contact-cta-btn {
+			text-decoration: none;
+			button {
+				display: flex;
+				align-items: center;
+				padding: 1rem 2rem;
+				img {
+					margin-right: 1rem;
+				}
+			}
+		}
+		.contact-cta-info-text {
+			padding: 0 3rem;
+			color: white;
+		}
+	}
+}
+//KORZYŚCI TLENOTERAPII
+//KORZYŚCI
+.therapy-benefits {
+	padding: 3rem 5rem;
+	text-align: center;
+	.title-box {
+		.title {
+			font-size: 2.6rem;
+			text-transform: uppercase;
+		}
+		.undertitle {
+			margin: 2rem 0;
+			text-transform: uppercase;
+			font-weight: 500;
+		}
+	}
+
+	.first-photo-box {
+		img {
+			margin: 2rem 0;
+			width: 200px;
+		}
+	}
+	.info-box {
+		&-title {
+			font-weight: 500;
+			text-transform: uppercase;
+		}
+		&-text {
+			margin: 2rem 0 4rem;
+		}
+	}
+	.therapy-benefits-list {
+		&-text {
+			margin: 2rem 0 5rem;
+			display: inline-block;
+			text-align: left;
+			li {
+				margin: 1rem 0;
+			}
+		}
+	}
+	.therapy-benefits-images {
+		&-element {
+			margin-bottom: 4rem;
+			img {
+				margin-bottom: 1rem;
+				width: 75vw;
+				height: 170px;
+				object-fit: cover;
+				border-radius: 8px;
+			}
+			&-text {
+				&-title {
+					margin-bottom: 1rem;
+					font-weight: 500;
+					text-transform: uppercase;
+					text-align: left;
+				}
+			}
+		}
+	}
+	.text-modify {
+		text-align: left;
+	}
+}
+//PRZECIWWSKAZANIA
+.contraindications {
+	padding: 0 3rem;
+
+	&-title {
+		margin-bottom: 2rem;
+		text-align: center;
+	}
+	&-lists {
+		padding-bottom: 3rem;
+		&-element {
+			&-title {
+				margin-bottom: 1rem;
+				font-weight: 500;
+			}
+			&-list {
+				transform: translateX(1rem);
+				li {
+					margin: 1rem 0;
+					ul {
+						li {
+							list-style: square inside;
+							&:last-of-type {
+								margin-bottom: 3rem;
+							}
+						}
+					}
+				}
+			}
+		}
+	}
+}
+
+//
+//CENNIK
+.promo {
+	padding: 2rem;
+	text-align: center;
+	&-title {
+		font-size: 2.4rem;
+		font-weight: 500;
+	}
+	&-year {
+		margin-top: 1rem;
+		margin-bottom: 1rem;
+	}
+	&-price {
+		font-size: 2.6rem;
+		font-weight: 600;
+		animation: promoTextFlicker 2s infinite;
+	}
+}
+.pricing {
+	padding: 0 1rem;
+	text-align: center;
+	&-title {
+		text-transform: uppercase;
+	}
+	&-table {
+		margin: 2rem auto 4rem;
+		th,
+		td {
+			padding: 2rem;
+			border: 1px solid black;
+		}
+		th {
+			background-color: colors.$main;
+		}
+	}
+}
+.pricing-social-media {
+	&-text {
+		text-transform: uppercase;
+	}
+	&-link {
+		display: block;
+		margin: 0 auto;
+		width: 100px;
+		img {
+			margin-top: 1rem;
+			width: 60px;
+		}
+	}
+}
+.pricing-rules {
+	margin-top: 3rem;
+	margin-bottom: 3rem;
+	color: rgba($color: black, $alpha: 0.6);
+}
+//RULES
+.rules {
+	padding: 3rem;
+	text-align: center;
+	&-logo {
+		width: 250px;
+	}
+	&-content {
+		text-align: left;
+		&-title {
+			margin-bottom: 3rem;
+			text-align: center;
+		}
+		&-text {
+			margin: 2rem 0;
+			font-weight: 500;
+		}
+	}
+	&-points {
+		text-align: left;
+		&-list {
+			list-style-type: none;
+			&-element {
+				margin-bottom: 3rem;
+				span {
+					display: block;
+					margin-bottom: 1rem;
+					font-size: 2.5rem;
+					font-weight: 500;
+				}
+				ul {
+					li {
+						margin-bottom: 1rem;
+						font-size: 1.8rem;
+						list-style-position: inside;
+						list-style-type: decimal;
+					}
+				}
+			}
+		}
+	}
+}
+
+//FOOTER
+.footer {
+	border-top: 1px solid rgba($color: black, $alpha: 0.1);
+	&-top {
+		text-align: center;
+		.footer-logo {
+			margin-top: 2rem;
+			img {
+				width: 70px;
+			}
+		}
+		.footer-links {
+			&-title {
+				margin-top: 1rem;
+				text-transform: uppercase;
+				font-weight: 500;
+			}
+			.footer-link {
+				display: block;
+				margin: 1rem 0;
+				color: black;
+			}
+		}
+		.footer-contact {
+			&-phone {
+				&-title {
+					margin-top: 2rem;
+					margin-bottom: 1rem;
+					text-transform: uppercase;
+					font-weight: 500;
+				}
+				&-undertitle {
+					margin-bottom: 1rem;
+				}
+				&-number {
+					display: block;
+					margin-bottom: 2rem;
+					color: black;
+				}
+			}
+			&-social {
+				&-title {
+					margin-bottom: 1rem;
+					text-transform: uppercase;
+					font-weight: 500;
+				}
+				.social-media {
+					margin-bottom: 1rem;
+					display: flex;
+					align-items: center;
+					justify-content: center;
+					img {
+						display: block;
+						width: 30px;
+					}
+					a {
+						color: black;
+					}
+				}
+			}
+		}
+	}
+	&-bottom {
+		margin-top: 2rem;
+		padding: 1rem;
+		text-align: center;
+		border-top: 1px solid black;
+	}
+}
+
+//MEDIA QUERIES
+@media (min-width: 996px) {
+	//NAWIGACJA
+	.nav {
+		display: flex;
+		justify-content: start;
+		align-items: center;
+
+		&-logo {
+			margin-left: 2rem;
+		}
+
+		&-toggle {
+			display: none;
+		}
+
+		&-link-box {
+			position: static;
+			height: 100%;
+			width: 100%;
+			display: flex;
+			flex-direction: row;
+			justify-content: space-between;
+			align-items: center;
+
+			.nav-toggle {
+				display: none;
+			}
+
+			.nav-links {
+				display: flex;
+				width: 50%;
+				flex-direction: row;
+				justify-content: space-around;
+				text-align: left;
+
+				&-link {
+					&:hover {
+						text-decoration: underline;
+					}
+				}
+			}
+			.nav-reservation-btn {
+				margin: 0;
+				margin-right: 2rem;
+				width: 200px;
+				transform: translateY(0);
+				cursor: pointer;
+				transition: background-color 0.2s ease-out;
+				&:hover {
+					background-color: colors.$hover;
+				}
+			}
+		}
+	}
+	//PANEL DO REZERWACJI
+	.reservation-panel {
+		&-content {
+			width: 40%;
+			padding-left: 4rem;
+			padding-right: 4rem;
+
+			&-close-btn {
+				margin-right: -2rem;
+				cursor: pointer;
+			}
+
+			&-text {
+				font-size: 3rem;
+			}
+			&-btn {
+				font-size: 2rem;
+				margin: 4rem auto;
+				padding-left: 4rem;
+				padding-right: 4rem;
+			}
+			&-info {
+				margin-bottom: 3rem;
+			}
+		}
+	}
+	//SEKCJA HERO
+	.hero {
+		&-box {
+			display: flex;
+			justify-content: space-between;
+			align-items: center;
+			margin-top: 5rem;
+
+			&-text {
+				margin-top: 0;
+				text-align: left;
+				padding-right: 5rem;
+
+				&-title {
+					width: 50%;
+					font-size: 5rem;
+				}
+				&-undertitle {
+					font-size: 2rem;
+					width: 75%;
+				}
+			}
+
+			img {
+				width: 450px;
+			}
+		}
+	}
+	//SEKCJA POD HERO - PLUSY KORZYSTANIA
+	.three-benefits {
+		background-color: colors.$main;
+		.wrapper {
+			display: flex;
+			flex-direction: row;
+			align-items: center;
+			justify-content: space-between;
+			padding: 2rem;
+		}
+		&-box {
+			width: 300px;
+			margin: 2rem 0;
+			text-align: center;
+			img {
+				display: block;
+				height: 80px;
+				margin: 0 auto 2rem;
+			}
+			&-text {
+				color: white;
+				font-size: 2rem;
+				font-weight: 500;
+			}
+		}
+	}
+	//SEKCJA Z WIDEO
+	.video {
+		&-title {
+			font-size: 3.5rem;
+		}
+		&-element {
+			margin-bottom: 3rem;
+			width: 600px;
+		}
+		&-promo {
+			&-text {
+				&:nth-of-type(1),
+				&:nth-of-type(3) {
+					font-size: 2.6rem;
+				}
+			}
+		}
+		&-cta {
+			display: flex;
+			justify-content: center;
+			align-items: center;
+			&-text {
+				margin: 0 0 0 3rem;
+				width: fit-content;
+				&-content {
+					font-size: 1.8rem;
+				}
+				&-btn {
+					margin: 2rem auto 4rem;
+					display: block;
+					width: 100%;
+					button {
+						padding: 1rem 2rem;
+						text-transform: uppercase;
+						cursor: pointer;
+					}
+				}
+			}
+		}
+	}
+	//CTA KONTAKT
+	.contact-cta {
+		height: 600px;
+
+		&-logo {
+			img {
+				width: 150px;
+			}
+		}
+
+		&-content-box {
+			.contact-cta-title {
+				font-size: 5rem;
+			}
+			.contact-cta-btn {
+				button {
+					font-size: 2rem;
+					padding: 2rem 4rem;
+					cursor: pointer;
+					img {
+						height: 35px;
+					}
+				}
+			}
+			.contact-cta-info-text {
+				font-size: 17px;
+				width: 50%;
+			}
+		}
+	}
+	//KORZYŚCI TLENOTERAPII
+	//KORZYŚCI
+	.therapy-benefits {
+		.title-box {
+			.title {
+				font-size: 3.6rem;
+			}
+			.undertitle {
+				font-size: 2.2rem;
+			}
+		}
+
+		.first-photo-box {
+			display: flex;
+			flex-direction: row-reverse;
+			align-items: center;
+			justify-content: center;
+			img {
+				width: 150px;
+			}
+			&-text {
+				margin-left: 3rem;
+				max-width: 65%;
+			}
+		}
+		.info-box {
+			&-title {
+				text-align: center;
+			}
+			&-text {
+				max-width: 80%;
+				margin: 2rem auto 4rem;
+				text-align: center;
+			}
+		}
+		.therapy-benefits-list {
+			&-text {
+				max-width: 400px;
+			}
+		}
+		.therapy-benefits-images {
+			&-element {
+				display: flex;
+				align-items: center;
+				img {
+					margin-bottom: 0;
+					width: 150px;
+					height: 150px;
+				}
+				&-text {
+					margin: 0 2rem;
+					&-title {
+						margin-bottom: 1rem;
+						font-weight: 500;
+						text-transform: uppercase;
+						text-align: left;
+					}
+				}
+			}
+		}
+	}
+	//PRZECIWWSKAZANIA
+	.contraindications {
+		&-title {
+			margin-bottom: 3rem;
+		}
+		&-lists {
+			display: flex;
+			justify-content: space-between;
+			&-element {
+				max-width: 45%;
+				&-title {
+					margin-bottom: 2rem;
+				}
+			}
+		}
+	}
+	//FOOTER
+	.footer {
+		&-top {
+			display: flex;
+			justify-content: space-between;
+			padding-top: 3rem;
+			text-align: left;
+			.footer-logo {
+				margin-top: 0;
+				img {
+					width: 150px;
+				}
+			}
+			.footer-contact {
+				&-social {
+					.social-media {
+						justify-content: start;
+					}
+				}
+			}
+		}
+	}
+}
+
+//ANIMACJE
+@keyframes navOpenning {
+	0% {
+		top: -1000px;
+	}
+	100% {
+		top: 0;
+	}
+}
+
+@keyframes promoTextFlicker {
+	0% {
+		color: colors.$red;
+	}
+	50% {
+		color: colors.$dark-red;
+	}
+	100% {
+		color: colors.$red;
+	}
+}
